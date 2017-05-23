@@ -1,0 +1,15 @@
+{
+  "name": "TeamCity link prettify",
+  "version": "1.3",
+  "manifest_version": 3,
+  "description": "This extension will help you create well looks link to TeamCity browser's builds.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": { 
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png" },
+  "permissions": ["tabs", "<all_urls>"]
+}

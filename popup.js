@@ -1,4 +1,4 @@
-﻿chrome.runtime.onMessage.addListener(function(request, sender) {
+chrome.runtime.onMessage.addListener(function(request, sender) {
   function copyTextToClipboard(text) {
     var textArea = document.createElement("textarea");
     
@@ -30,37 +30,33 @@
   }
   
   if (request.action == "getSource") {
-    var S = request.source;
+    	var S = request.source;
     
-    var Location = S[1];
-    var $html = $(S[0]);
-    var Branch = $html.find('button.btn.btn_mini').attr('onclick').split('branchName: \'')[1].split('\' }')[0].replace("\\","");
-    
-    if (Branch == '<default>') {
-      Branch = 'master';
-    }
+    	var Location = S[1];
+    	var $html = $(S[0]);
+    	var Branch = $html.find('button.btn.btn_mini').attr('onclick').split('branchName: \'')[1].split('\' }')[0].replace("\\","");
+    	if (Branch == '<default>') {
+    		Branch = 'master';
+    	}
 	
-	  var Channel = $html.find('.last.buildType').text();
-	  var Assembly = $html.find('.contentWrapper').text().split( /#/ )[1];
-
-	  var CSSVar = 'background-color: black; color: lime; font-weight: lighter; font-size: 16px;';
-      var OS;
-	  
-	  switch (Channel.split('.').pop(-1)) {
-		  case "win" : OS = "__Win7 x64__"; 
+	var Channel = $html.find('.last.buildType').text();
+	var Assembly = $html.find('.contentWrapper').text().split( /#/ )[1];
+	var OS="";
+	switch (Channel.split('.').pop(-1)) {
+		case "win" : OS = "__Win7 x64__"; 
 			break;
-		  case "mac" : OS = "__MacOS 10.12__"; 
+		case "mac" : OS = "__MacOS 10.12__"; 
 			break;
-		  default: OS = "__Ubuntu 17.04__";		  
-	  }
+		default: OS = "__Ubuntu 17.04__";		  
+	}
 	
 	var Result = OS + ": ветка %%" + Branch + ", Branded distributives > " + Channel + " >%% ((" + Location + " " + Assembly + " ))";
-    var info = '<span style="font-weight: bold; font-size: 16px; color: white;">The following link copied into clipboard:</span><br>';
-    var Str = '<span style="' + CSSVar + '">' + Result + '</span>';
-
-    copyTextToClipboard(Result);
-
-    message.innerHTML = info + Str;
+     	copyTextToClipboard(Result); 
+	  
+	var info = '<span style="font-weight: bold; font-size: 16px; color: white;">The following link copied into clipboard:</span><br>';
+	var CSSVar = 'background-color: black; color: lime; font-weight: lighter; font-size: 16px;';	
+    	var Str = '<span style="' + CSSVar + '">' + Result + '</span>';
+	message.innerHTML = info + Str;
   }
 });
 
